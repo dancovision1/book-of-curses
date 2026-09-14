@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Book of Curses</title>
   <link rel="stylesheet" href="css/game.css" />
+  <link rel="stylesheet" href="css/splash.css" />
 </head>
 <body class="curse-0 booting">
   <div class="splash" id="splash">
@@ -17,6 +18,107 @@
   <div class="backdrop"></div>
   <div class="embers" id="embers"></div>
   <div class="vignette"></div>
-  <p style="display:none">See repo files for full game shell — splash markup injected; keep existing app below in working copy.</p>
+  <div class="app">
+    <header class="topbar">
+      <div class="logo-wrap">
+        <div class="logo-book" id="miniBook"></div>
+        <div class="titles">
+          <h1>BOOK OF <span>CURSES</span></h1>
+          <p>Forbidden archaeology</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="infoBtn" title="Paytable & rules">i</button>
+        <button class="icon-btn" id="simBtn" title="Simulation">Σ</button>
+        <button class="icon-btn" id="debugBtn" title="Developer">⌘</button>
+        <button class="icon-btn on" id="soundBtn" title="Sound">♪</button>
+      </div>
+    </header>
+    <div class="stage">
+      <aside class="side-panel">
+        <div class="book-hero alive" id="hero">
+          <div class="book-chains" id="bookChains"></div>
+          <div class="hero-svg" id="heroSvg" style="width:120px;height:140px"></div>
+          <div class="hero-caption" id="heroCaption">THE BOOK IS SEALED</div>
+        </div>
+        <div class="meter-card">
+          <h3>CURSE METER</h3>
+          <div class="energy-readout"><span>CURSE ENERGY</span><strong id="energyRead">0 / 9</strong></div>
+          <div class="energy-bar"><div class="energy-fill" id="energyFill"></div></div>
+          <div class="curse-steps">
+            <div class="curse-step">I  AWAKENED</div>
+            <div class="curse-step">II  CORRUPTED  ×2</div>
+            <div class="curse-step">III  POSSESSED  +SYMBOL</div>
+            <div class="curse-step">IV  FULL CURSE</div>
+          </div>
+        </div>
+      </aside>
+      <section class="machine">
+        <div class="frame" id="frame">
+          <div class="reels" id="reels">
+            <div class="reel" data-r="0"><div class="reel-window"><div class="cell" data-r="0" data-row="0"><div class="sym"></div></div><div class="cell" data-r="0" data-row="1"><div class="sym"></div></div><div class="cell" data-r="0" data-row="2"><div class="sym"></div></div></div></div>
+            <div class="reel" data-r="1"><div class="reel-window"><div class="cell" data-r="1" data-row="0"><div class="sym"></div></div><div class="cell" data-r="1" data-row="1"><div class="sym"></div></div><div class="cell" data-r="1" data-row="2"><div class="sym"></div></div></div></div>
+            <div class="reel" data-r="2"><div class="reel-window"><div class="cell" data-r="2" data-row="0"><div class="sym"></div></div><div class="cell" data-r="2" data-row="1"><div class="sym"></div></div><div class="cell" data-r="2" data-row="2"><div class="sym"></div></div></div></div>
+            <div class="reel" data-r="3"><div class="reel-window"><div class="cell" data-r="3" data-row="0"><div class="sym"></div></div><div class="cell" data-r="3" data-row="1"><div class="sym"></div></div><div class="cell" data-r="3" data-row="2"><div class="sym"></div></div></div></div>
+            <div class="reel" data-r="4"><div class="reel-window"><div class="cell" data-r="4" data-row="0"><div class="sym"></div></div><div class="cell" data-r="4" data-row="1"><div class="sym"></div></div><div class="cell" data-r="4" data-row="2"><div class="sym"></div></div></div></div>
+          </div>
+          <svg class="payline-svg" id="paylineSvg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+          <div class="ink-veil" id="inkVeil"></div>
+          <div class="banner" id="banner"><h2 id="bannerTitle"></h2><p id="bannerSub"></p></div>
+          <div class="ceremony" id="ceremony"><div class="ceremony-book" id="ceremonyBook"></div><h2 id="ceremonyTitle"></h2><p id="ceremonySub"></p></div>
+        </div>
+      </section>
+      <aside class="right-panel">
+        <div class="stat-box"><label>Balance</label><div class="val" id="balVal">10,000</div></div>
+        <div class="stat-box"><label>Win</label><div class="val" id="winVal">0</div></div>
+        <div class="stat-box fs-box" id="fsBox" style="display:none"><div class="fs-label">Free Spins</div><div class="fs-count" id="fsCount">0</div><div class="fs-label">Cursed symbol</div><div class="cursed-preview" id="cursedPreview"></div></div>
+      </aside>
+    </div>
+    <footer class="controls">
+      <div class="bet-wrap">
+        <button class="bet-btn" id="betDown">−</button>
+        <div class="bet-display"><label>Bet</label><div class="amt" id="betAmt">10</div></div>
+        <button class="bet-btn" id="betUp">+</button>
+      </div>
+      <button class="spin-btn" id="spinBtn">Spin</button>
+      <div class="ctrl-right">
+        <button class="mini-btn" id="autoBtn">Auto</button>
+        <button class="mini-btn" id="turboBtn">Turbo</button>
+      </div>
+    </footer>
+  </div>
+  <div class="overlay" id="infoOverlay"><div class="modal"><button class="close-x" id="infoClose">×</button><h2>Book of Curses</h2><p>Virtual credits only. Open Info in-game for full rules.</p><h3>Paytable</h3><table class="pay-grid"><thead><tr><th>Symbol</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody id="payBody"></tbody></table></div></div>
+  <div class="overlay" id="simOverlay"><div class="modal"><button class="close-x" id="simClose">×</button><h2>Monte Carlo</h2><p>Spins <input id="simSpins" value="200000" style="width:110px;background:#0a0806;color:#e8dcc0;border:1px solid #3a2e16;padding:4px 6px"> Seed <input id="simSeed" value="7" style="width:80px;background:#0a0806;color:#e8dcc0;border:1px solid #3a2e16;padding:4px 6px"> <button class="mini-btn on" id="runSim">Run</button></p><div class="sim-out" id="simOut">Ready.</div></div></div>
+  <div class="debug-dock" id="debugDock">
+    <h4>DEV · SCENARII</h4>
+    <div class="debug-grid">
+      <button data-scene="tease">2 Books tease</button>
+      <button data-scene="trigger">3 Books → FS</button>
+      <button data-scene="enter">Intră în bonus</button>
+      <button data-scene="retrigger">Retrigger +5</button>
+    </div>
+    <h4>CURSE LEVEL + SPIN</h4>
+    <div class="debug-grid">
+      <button data-scene="curse1">I Awakened · x3</button>
+      <button data-scene="curse2">II Corrupted · x4</button>
+      <button data-scene="curse3">III Possessed · x4</button>
+      <button data-scene="full">FULL CURSE</button>
+      <button data-scene="expand3">Expand 3 reels</button>
+      <button data-scene="expand5">Expand 5 reels</button>
+      <button data-scene="maxwin">Max win banner</button>
+      <button data-scene="reset">Reset + 10,000</button>
+    </div>
+    <h4>CURSED SYMBOL</h4>
+    <div class="sym-pick" id="symPick"></div>
+    <input id="seedInput" placeholder="RNG seed" />
+    <button id="seedApply">Apply seed</button>
+  </div>
+  <script src="js/config.js"></script>
+  <script src="js/rng.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/symbols.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/splash.js"></script>
 </body>
 </html>
