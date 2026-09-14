@@ -1,5 +1,6 @@
 (function () {
   const files = [
+    ["assets/dvision-gaming.svg", "DVISION"],
     ["assets/bg-temple.jpg", "STONE"],
     ["assets/the-vault-breathes.mp3", "THE VAULT"],
     ["assets/symbols/10.jpg", "10"],
@@ -17,21 +18,17 @@
   function $(id) { return document.getElementById(id); }
   function setProgress(i, total, label) {
     const p = Math.round((i / total) * 100);
-    const fill = $("splashFill");
-    const pct = $("splashPct");
-    const sub = $("splashSub");
-    if (fill) fill.style.width = p + "%";
-    if (pct) pct.textContent = p + "%";
-    if (sub && label) sub.textContent = label;
+    if ($("splashFill")) $("splashFill").style.width = p + "%";
+    if ($("splashPct")) $("splashPct").textContent = p + "%";
+    if ($("splashSub") && label) $("splashSub").textContent = label;
   }
   function loadOne(src) {
     return new Promise((resolve) => {
       if (src.endsWith(".mp3")) {
         const a = new Audio();
         a.preload = "auto";
-        const done = () => resolve();
-        a.addEventListener("canplaythrough", done, { once: true });
-        a.addEventListener("error", done, { once: true });
+        a.addEventListener("canplaythrough", resolve, { once: true });
+        a.addEventListener("error", resolve, { once: true });
         a.src = src;
         return;
       }
@@ -49,8 +46,7 @@
     if ($("splashSub")) $("splashSub").textContent = "THE BOOK IS SEALED";
     await new Promise((r) => setTimeout(r, 400));
     document.body.classList.remove("booting");
-    const splash = $("splash");
-    if (splash) splash.classList.add("gone");
+    if ($("splash")) $("splash").classList.add("gone");
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run);
   else run();

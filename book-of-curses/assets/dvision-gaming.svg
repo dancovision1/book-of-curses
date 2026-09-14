@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200">
+<defs>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#8E5B22"/>
+    <stop offset="0.28" stop-color="#F8E0A4"/>
+    <stop offset="0.52" stop-color="#C18A42"/>
+    <stop offset="0.76" stop-color="#FFF0BD"/>
+    <stop offset="1" stop-color="#9B6329"/>
+  </linearGradient>
+</defs>
+<g fill="url(#gold)">
+  <path fill-rule="evenodd" d="M430 165 L705 165 C930 165 1085 305 1085 500 C1085 695 930 835 705 835 L430 835 L430 680 L690 680 C825 680 915 610 915 500 C915 390 825 320 690 320 L430 320 Z M430 165 L555 320 L555 680 L430 835 Z"/>
+  <path d="M625 390 L625 610 L805 500 Z"/>
+  <text x="800" y="1000" text-anchor="middle" font-family="Montserrat, Arial, Helvetica, sans-serif" font-size="158" font-weight="700" letter-spacing="20">DVISION</text>
+  <text x="800" y="1115" text-anchor="middle" font-family="Montserrat, Arial, Helvetica, sans-serif" font-size="62" font-weight="400" letter-spacing="36">GAMING</text>
+</g>
+</svg>
