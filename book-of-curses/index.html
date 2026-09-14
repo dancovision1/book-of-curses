@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book of Curses</title>
+  <link rel="stylesheet" href="css/game.css" />
+</head>
+<body class="curse-0">
+  <div class="backdrop"></div>
+  <div class="embers" id="embers"></div>
+  <div class="vignette"></div>
+
+  <div class="app">
+    <header class="topbar">
+      <div class="logo-wrap">
+        <div class="logo-book" id="miniBook"></div>
+        <div class="titles">
+          <h1>BOOK OF <span>CURSES</span></h1>
+          <p>Forbidden archaeology</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-btn" id="infoBtn" title="Paytable & rules">i</button>
+        <button class="icon-btn" id="simBtn" title="Simulation">Σ</button>
+        <button class="icon-btn" id="debugBtn" title="Developer">⌘</button>
+        <button class="icon-btn on" id="soundBtn" title="Sound">♪</button>
+      </div>
+    </header>
+
+    <div class="stage">
+      <aside class="side-panel">
+        <div class="book-hero alive" id="hero">
+          <div class="book-chains" id="bookChains"></div>
+          <div class="hero-svg" id="heroSvg" style="width:120px;height:140px"></div>
+          <div class="hero-caption" id="heroCaption">THE BOOK IS SEALED</div>
+        </div>
+        <div class="meter-card">
+          <h3>CURSE METER</h3>
+          <div class="energy-readout">
+            <span>CURSE ENERGY</span>
+            <strong id="energyRead">0 / 9</strong>
+          </div>
+          <div class="energy-bar"><div class="energy-fill" id="energyFill"></div></div>
+          <div class="curse-steps">
+            <div class="curse-step">I  AWAKENED</div>
+            <div class="curse-step">II  CORRUPTED  ×2</div>
+            <div class="curse-step">III  POSSESSED  +SYMBOL</div>
+            <div class="curse-step">IV  FULL CURSE</div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="machine">
+        <div class="frame" id="frame">
+          <div class="reels" id="reels">
+            <div class="reel" data-r="0"><div class="reel-window">
+              <div class="cell" data-r="0" data-row="0"><div class="sym"></div></div>
+              <div class="cell" data-r="0" data-row="1"><div class="sym"></div></div>
+              <div class="cell" data-r="0" data-row="2"><div class="sym"></div></div>
+            </div></div>
+            <div class="reel" data-r="1"><div class="reel-window">
+              <div class="cell" data-r="1" data-row="0"><div class="sym"></div></div>
+              <div class="cell" data-r="1" data-row="1"><div class="sym"></div></div>
+              <div class="cell" data-r="1" data-row="2"><div class="sym"></div></div>
+            </div></div>
+            <div class="reel" data-r="2"><div class="reel-window">
+              <div class="cell" data-r="2" data-row="0"><div class="sym"></div></div>
+              <div class="cell" data-r="2" data-row="1"><div class="sym"></div></div>
+              <div class="cell" data-r="2" data-row="2"><div class="sym"></div></div>
+            </div></div>
+            <div class="reel" data-r="3"><div class="reel-window">
+              <div class="cell" data-r="3" data-row="0"><div class="sym"></div></div>
+              <div class="cell" data-r="3" data-row="1"><div class="sym"></div></div>
+              <div class="cell" data-r="3" data-row="2"><div class="sym"></div></div>
+            </div></div>
+            <div class="reel" data-r="4"><div class="reel-window">
+              <div class="cell" data-r="4" data-row="0"><div class="sym"></div></div>
+              <div class="cell" data-r="4" data-row="1"><div class="sym"></div></div>
+              <div class="cell" data-r="4" data-row="2"><div class="sym"></div></div>
+            </div></div>
+          </div>
+          <svg class="payline-svg" id="paylineSvg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
+          <div class="ink-veil" id="inkVeil"></div>
+          <div class="banner" id="banner">
+            <h2 id="bannerTitle"></h2>
+            <p id="bannerSub"></p>
+          </div>
+          <div class="ceremony" id="ceremony">
+            <div class="ceremony-book" id="ceremonyBook"></div>
+            <h2 id="ceremonyTitle"></h2>
+            <p id="ceremonySub"></p>
+          </div>
+        </div>
+      </section>
+
+      <aside class="right-panel">
+        <div class="stat-box">
+          <label>Balance</label>
+          <div class="val" id="balVal">10,000</div>
+        </div>
+        <div class="stat-box">
+          <label>Win</label>
+          <div class="val" id="winVal">0</div>
+        </div>
+        <div class="stat-box fs-box" id="fsBox" style="display:none">
+          <div class="fs-label">Free Spins</div>
+          <div class="fs-count" id="fsCount">0</div>
+          <div class="fs-label">Cursed symbol</div>
+          <div class="cursed-preview" id="cursedPreview"></div>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="controls">
+      <div class="bet-wrap">
+        <button class="bet-btn" id="betDown">−</button>
+        <div class="bet-display">
+          <label>Bet</label>
+          <div class="amt" id="betAmt">10</div>
+        </div>
+        <button class="bet-btn" id="betUp">+</button>
+      </div>
+      <button class="spin-btn" id="spinBtn">Spin</button>
+      <div class="ctrl-right">
+        <button class="mini-btn" id="autoBtn">Auto</button>
+        <button class="mini-btn" id="turboBtn">Turbo</button>
+      </div>
+    </footer>
+  </div>
+
+  <div class="overlay" id="infoOverlay">
+    <div class="modal">
+      <button class="close-x" id="infoClose">×</button>
+      <h2>Book of Curses</h2>
+      <p>Virtual credits only. 5 reels × 3 rows · 10 fixed paylines. The Book is Wild and Scatter.</p>
+
+      <h3>Base game</h3>
+      <ul>
+        <li>Wins pay left to right on a payline. The Book substitutes for any paying symbol.</li>
+        <li>Paytable values are × line bet. Line bet = total bet ÷ 10.</li>
+        <li>3 or more Books anywhere on the grid start Free Spins. 4 or 5 Books still start the same bonus (they do not add extra spins on the trigger).</li>
+        <li>Nothing from a previous bonus carries into the base game. Curse Energy, Curse level, Cursed Symbols and infection all reset when the Book closes.</li>
+      </ul>
+
+      <h3>Free Spins — how a bonus starts</h3>
+      <ul>
+        <li>You receive 10 Free Spins. The stake of the triggering spin is used for the whole bonus.</li>
+        <li>The Book opens and randomly chooses <strong>one paying symbol</strong> (not the Book). That is the Cursed Symbol for this bonus only.</li>
+        <li>A new bonus always starts at <strong>CURSE I — Awakened</strong>, energy 0. There is no “saved curse” between sessions.</li>
+      </ul>
+
+      <h3>Expanding Cursed Symbol</h3>
+      <ul>
+        <li>If the Cursed Symbol appears on <strong>3 or more different reels</strong>, those reels fill top-to-bottom with that symbol.</li>
+        <li>The expand pays the 3 / 4 / 5-of-a-kind value on <strong>all 10 paylines</strong> (classic Book math), then applies the current Curse multiplier.</li>
+        <li>Ordinary line wins still pay, except lines of the same symbol that just expanded — those are not paid twice.</li>
+        <li>One Cursed Symbol on a single reel does nothing special. Two reels do nothing. The third reel is the unlock.</li>
+      </ul>
+
+      <h3>Curse Meter — during this bonus only</h3>
+      <p>Energy is the only progress track. Levels never go down inside a bonus.</p>
+      <ul>
+        <li>Successful expand on 3 reels: <strong>+1</strong> energy</li>
+        <li>4 reels: <strong>+2</strong></li>
+        <li>5 reels: <strong>+3</strong></li>
+        <li>Retrigger (3 Books during Free Spins): <strong>+5 spins</strong> and <strong>+1 energy</strong></li>
+        <li>Infection cells that later expand: <strong>+1</strong> extra energy</li>
+      </ul>
+      <ul>
+        <li><strong>0–2 energy · CURSE I Awakened</strong> — expand pays ×1</li>
+        <li><strong>3–5 · CURSE II Corrupted</strong> — expand pays ×2</li>
+        <li><strong>6–8 · CURSE III Possessed</strong> — the Book picks a <em>second</em> Cursed Symbol. Both can expand on the same spin. Multiplier stays ×2</li>
+        <li><strong>9+ · FULL CURSE</strong> — infection unlocks. Expand multiplier ×2 (×3 is reserved if math is retuned later)</li>
+      </ul>
+
+      <h3>What persists — and what does not</h3>
+      <p><strong>Inside one Free Spins session</strong> (including retriggers):</p>
+      <ul>
+        <li>Kept: remaining spins, Curse Energy, Curse level, both Cursed Symbols, “Full Curse already unlocked”, running bonus win.</li>
+        <li>Kept for the <em>next Free Spin only</em>: a few infected cells may stay on the grid (~18% of them). That is the only carry from spin to spin besides the meter.</li>
+        <li>Retriggers do <em>not</em> reset the meter and do <em>not</em> pick a new first symbol. They only add spins and one energy.</li>
+      </ul>
+      <p><strong>When the Book closes</strong> (0 spins left, or you return to the base game):</p>
+      <ul>
+        <li>Wiped: energy, Curse level, Cursed Symbols, second symbol, infection leftovers, Full Curse flag.</li>
+        <li>The next time you land 3 Books you start again at CURSE I with a newly chosen symbol. You cannot “keep” a Possessed or Full Curse bonus for later.</li>
+        <li>Your credit balance stays. That is the only thing that survives across bonuses.</li>
+      </ul>
+
+      <h3>FULL CURSE — infection</h3>
+      <ul>
+        <li>The first time energy reaches 9 in this bonus, the Full Curse ceremony plays.</li>
+        <li>On that spin and every later Free Spin of the <em>same</em> bonus, Cursed Symbols can infect neighbouring cells (up / down / left / right), chance 45% per neighbour, one wave.</li>
+        <li>After infection the game re-checks expands. A bigger expand replaces a smaller one for that symbol; it does not pay both.</li>
+        <li>Infection does not continue after the bonus ends.</li>
+      </ul>
+
+      <h3>Max win</h3>
+      <p>Any single evaluation is capped at <strong>10,000 × total bet</strong>. If the cap hits, the Book closes and the “YOU SHOULDN’T HAVE OPENED IT.” presentation plays.</p>
+      <h3>Paytable <small>(× line bet · 10 lines)</small></h3>
+      <table class="pay-grid">
+        <thead><tr><th>Symbol</th><th>3</th><th>4</th><th>5</th></tr></thead>
+        <tbody id="payBody"></tbody>
+      </table>
+      <h3>Responsible play</h3>
+      <p>Prototype with virtual credits. No deposits or real-money wagering. Theoretical target RTP ~96% (high volatility) — verify in Simulation. Max exposure 10,000× bet.</p>
+    </div>
+  </div>
+
+  <div class="overlay" id="simOverlay">
+    <div class="modal">
+      <button class="close-x" id="simClose">×</button>
+      <h2>Monte Carlo</h2>
+      <p>Headless engine — same math as the visible game. 100k–1M spins recommended.</p>
+      <p style="margin-top:10px">
+        Spins <input id="simSpins" value="200000" style="width:110px;background:#0a0806;color:#e8dcc0;border:1px solid #3a2e16;padding:4px 6px">
+        Seed <input id="simSeed" value="7" style="width:80px;background:#0a0806;color:#e8dcc0;border:1px solid #3a2e16;padding:4px 6px">
+        <button class="mini-btn on" id="runSim">Run</button>
+      </p>
+      <div class="sim-out" id="simOut">Ready.</div>
+    </div>
+  </div>
+
+  <div class="debug-dock" id="debugDock">
+    <h4>DEV · SCENARII</h4>
+    <div class="debug-grid">
+      <button data-scene="tease">2 Books tease</button>
+      <button data-scene="trigger">3 Books → FS</button>
+      <button data-scene="enter">Intră în bonus</button>
+      <button data-scene="retrigger">Retrigger +5</button>
+    </div>
+    <h4>CURSE LEVEL + SPIN</h4>
+    <div class="debug-grid">
+      <button data-scene="curse1">I Awakened · x3</button>
+      <button data-scene="curse2">II Corrupted · x4</button>
+      <button data-scene="curse3">III Possessed · x4</button>
+      <button data-scene="full">FULL CURSE</button>
+      <button data-scene="expand3">Expand 3 reels</button>
+      <button data-scene="expand5">Expand 5 reels</button>
+      <button data-scene="maxwin">Max win banner</button>
+      <button data-scene="reset">Reset + 10,000</button>
+    </div>
+    <h4>CURSED SYMBOL</h4>
+    <div class="sym-pick" id="symPick"></div>
+    <input id="seedInput" placeholder="RNG seed" />
+    <button id="seedApply">Apply seed</button>
+    <p class="debug-note">Alege simbolul, apoi un scenariu. Full Curse pornește bonusul dacă nu ești deja în el și forțează infecția pe spinul următor.</p>
+  </div>
+
+  <script src="js/asset-data.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/rng.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/symbols.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
