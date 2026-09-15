@@ -6,6 +6,7 @@
   <title>Book of Curses</title>
   <link rel="stylesheet" href="css/game.css" />
   <link rel="stylesheet" href="css/splash.css" />
+  <link rel="stylesheet" href="css/pages-fix.css" />
 </head>
 <body class="curse-0 booting">
   <div class="splash" id="splash">
@@ -32,7 +33,7 @@
       <div class="top-actions">
         <button class="icon-btn" id="infoBtn" title="Paytable & rules">i</button>
         <button class="icon-btn" id="simBtn" title="Simulation">Σ</button>
-        <button class="icon-btn" id="debugBtn" title="Developer">⌘</button>
+        <button class="icon-btn" id="debugBtn" title="Developer tools">DEV</button>
         <button class="icon-btn on" id="soundBtn" title="Sound">♪</button>
       </div>
     </header>
@@ -40,7 +41,7 @@
       <aside class="side-panel">
         <div class="book-hero alive" id="hero">
           <div class="book-chains" id="bookChains"></div>
-          <div class="hero-svg" id="heroSvg" style="width:120px;height:140px"></div>
+          <div class="hero-svg" id="heroSvg"></div>
           <div class="hero-caption" id="heroCaption">THE BOOK IS SEALED</div>
         </div>
         <div class="meter-card">
@@ -122,5 +123,6 @@
   <script src="js/audio.js"></script>
   <script src="js/main.js"></script>
   <script src="js/splash.js"></script>
+  <script src="js/pages-fix.js"></script>
 </body>
 </html>
