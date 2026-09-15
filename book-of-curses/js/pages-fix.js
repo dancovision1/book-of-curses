@@ -9,12 +9,14 @@
     dock.classList.remove("show");
     btn.classList.remove("on");
     btn.addEventListener("click", function () {
-      const open = dock.classList.toggle("show");
-      btn.classList.toggle("on", open);
+      setTimeout(function () {
+        btn.classList.toggle("on", dock.classList.contains("show"));
+      }, 0);
     });
     setTimeout(function () {
-      if (!btn.classList.contains("on")) dock.classList.remove("show");
-    }, 1200);
+      dock.classList.remove("show");
+      btn.classList.remove("on");
+    }, 1500);
   }
   function cellCenter(reel, row, box) {
     const cell = document.querySelector('.cell[data-r="' + reel + '"][data-row="' + row + '"]');
