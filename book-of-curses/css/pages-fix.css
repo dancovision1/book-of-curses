@@ -1,0 +1,39 @@
+.icon-btn#debugBtn {
+  width: auto; min-width: 38px; padding: 0 10px; border-radius: 18px;
+  font-size: 10px; letter-spacing: .16em;
+}
+.icon-btn#debugBtn.on {
+  border-color: #1dff8a; color: #1dff8a;
+  box-shadow: 0 0 12px rgba(29,255,138,.35);
+}
+.book-hero {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+.hero-svg {
+  width: 132px; height: auto; background: none; border: none; box-shadow: none;
+}
+.hero-art {
+  width: 132px; height: auto; aspect-ratio: 3 / 4;
+  object-fit: contain; border-radius: 10px; background: none;
+  box-shadow: 0 12px 28px rgba(0,0,0,.55), 0 0 22px rgba(29,255,138,.18);
+}
+.payline-svg { inset: 0 !important; overflow: visible; pointer-events: none; }
+.payline-svg path {
+  fill: none; stroke: #f0d48a; stroke-width: 3.2;
+  stroke-linecap: round; stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px #f0d48a);
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  animation: lineTrace .55s ease-out forwards;
+}
+.payline-svg circle.node {
+  fill: #fff6d2; stroke: #c9a44a; stroke-width: 1.5;
+  filter: drop-shadow(0 0 6px #f0d48a);
+}
+.cell.line-on {
+  background: radial-gradient(circle, rgba(240,212,138,.28), transparent 72%);
+  box-shadow: inset 0 0 0 1px rgba(240,212,138,.45);
+}
+@keyframes lineTrace { to { stroke-dashoffset: 0; } }
