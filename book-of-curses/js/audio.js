@@ -84,10 +84,41 @@
       this.tone(88, 0.1, "triangle", 0.08);
       this.noise(0.06, 0.035, 600);
     }
-    scatter() {
-      this.tone(196, 0.28, "sine", 0.11);
-      this.tone(294, 0.32, "triangle", 0.07, 0.04);
-      this.tone(392, 0.22, "sine", 0.04, 0.1);
+    scatter(n) {
+      n = Math.max(1, n || 1);
+      const g = 0.16 + n * 0.07;
+      this.noise(0.12 + n * 0.04, 0.06 + n * 0.03, 1400);
+      this.tone(98, 0.22, "sine", g * 0.7);
+      this.tone(196 + n * 18, 0.38, "sine", g);
+      this.tone(294 + n * 24, 0.42, "triangle", g * 0.55, 0.05);
+      this.tone(392 + n * 30, 0.36, "sine", g * 0.35, 0.12);
+      if (n >= 2) {
+        this.tone(523, 0.5, "sine", 0.08 + n * 0.03, 0.16);
+        this.tone(48, 0.55, "sine", 0.14, 0.02);
+      }
+      if (n >= 3) {
+        this.tone(659, 0.7, "triangle", 0.1, 0.2);
+        this.noise(0.28, 0.1, 900);
+      }
+    }
+    teaseStart(books) {
+      this.stopHeartbeat();
+      if (!this.enabled) return;
+      this.ensure();
+      if (!this.ctx) return;
+      const pace = books >= 2 ? 520 : 720;
+      const beat = () => {
+        this.tone(62, 0.14, "sine", 0.18);
+        this.tone(92, 0.1, "sine", 0.1, 0.12);
+        this.tone(180 + books * 40, 0.2, "triangle", 0.05, 0.02);
+      };
+      beat();
+      this.heartbeat = setInterval(beat, pace);
+      this.tone(140, 0.8, "sine", 0.06);
+      this.tone(220, 1.1, "triangle", 0.04, 0.1);
+    }
+    stopTease() {
+      this.stopHeartbeat();
     }
     cursedLand() {
       this.tone(155, 0.22, "sine", 0.12);
@@ -198,7 +229,6 @@
         this.trackNode = this.ctx.createMediaElementSource(this.track);
         this.trackNode.connect(this.music);
       } catch (e) {
-        // already connected or CORS — fall back to element volume
         this.trackNode = true;
       }
     }
