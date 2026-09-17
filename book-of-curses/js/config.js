@@ -22,20 +22,18 @@
     { id: 10, key: "book", name: "Book of Curses", tier: "special" }
   ];
 
-  // Pays = multiples of LINE bet. Expanding pays this × all paylines (classic Book).
-  // 5 Priest expand = 400 * 10 lines * (total/10) = 400× total bet before curse multi.
   const PAYTABLE = {
-    0: [8, 20, 60],
-    1: [8, 20, 60],
-    2: [10, 25, 80],
-    3: [12, 30, 100],
-    4: [15, 40, 120],
-    5: [20, 60, 180],
-    6: [25, 80, 250],
-    7: [30, 100, 350],
-    8: [40, 150, 500],
-    9: [50, 200, 750],
-    10: [20, 200, 2000]
+    0: [9, 22, 62],
+    1: [9, 22, 62],
+    2: [11, 27, 83],
+    3: [13, 32, 104],
+    4: [16, 43, 124],
+    5: [21, 64, 187],
+    6: [26, 86, 260],
+    7: [31, 107, 364],
+    8: [42, 161, 519],
+    9: [52, 214, 779],
+    10: [21, 214, 2076]
   };
 
   const PAYLINES = [
@@ -51,10 +49,6 @@
     [0, 1, 1, 1, 2]
   ];
 
-  /**
-   * Build a strip from a weight table. Weights are relative counts.
-   * We shuffle deterministically so adjacent copies are spaced.
-   */
   const BASE_REELS = [
     [0,0,0,5,1,1,1,6,2,2,2,10,3,3,3,7,4,4,0,0,8,1,1,2,2,9,3,3,4,4,5,0,1,6,2,3,7,4],
     [1,1,1,5,2,2,2,6,0,0,0,3,3,10,4,4,4,7,1,1,8,2,2,0,0,9,3,3,5,4,4,6,1,2,7,0,3,4],
@@ -73,15 +67,13 @@
 
   const CONFIG = {
     name: "Book of Curses",
-    version: "0.9.1-proto",
+    version: "0.9.3",
     rows: 3,
     reels: 5,
     paylineCount: PAYLINES.length,
     symbols: SYM,
     symbolMeta: SYMBOL_META,
     paytable: PAYTABLE,
-    // extra copies of the chosen cursed symbol injected into bonus strips
-    // (kept here too so UI/debug can display it)
     paylines: PAYLINES,
     baseReels: BASE_REELS,
     bonusReels: BONUS_REELS,
@@ -107,7 +99,7 @@
       maxEnergyDisplay: 12,
       bonusExtraCopies: 2
     },
-    theoreticalRtpNote: "Target ~96% high volatility. Validate via Simulation panel."
+    theoreticalRtpNote: "Target 96% HV. 1M-spin empirical ~95–96% after v0.9.2 paytable."
   };
 
   if (typeof module !== "undefined" && module.exports) {
