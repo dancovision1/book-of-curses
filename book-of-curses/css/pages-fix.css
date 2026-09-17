@@ -12,20 +12,25 @@
   box-shadow: none !important;
   overflow: visible !important;
 }
+.book-chains { display: none !important; }
 .hero-svg {
-  width: 132px; height: auto; background: none; border: none; box-shadow: none;
+  width: 148px; height: auto; background: none !important; border: none !important; box-shadow: none !important;
 }
 .hero-art {
-  width: 132px; height: auto; aspect-ratio: 3 / 4;
-  object-fit: contain; border-radius: 10px; background: none;
-  box-shadow: 0 12px 28px rgba(0,0,0,.55), 0 0 22px rgba(29,255,138,.18);
+  width: 148px; height: auto; aspect-ratio: 3 / 4;
+  object-fit: contain; border-radius: 0 !important;
+  background: transparent !important;
+  mix-blend-mode: lighten;
+  box-shadow: none !important;
+  filter: drop-shadow(0 14px 24px rgba(0,0,0,.65)) drop-shadow(0 0 18px rgba(29,255,138,.22));
 }
+.energy-readout { gap: 8px; }
+.energy-readout span, .energy-readout strong { white-space: nowrap; }
 .payline-svg { inset: 0 !important; overflow: visible; pointer-events: none; }
 .payline-svg path {
   fill: none; stroke: #f0d48a; stroke-width: 3.2;
   stroke-linecap: round; stroke-linejoin: round;
   filter: drop-shadow(0 0 6px #f0d48a);
-  stroke-dasharray: 1; stroke-dashoffset: 1;
   animation: lineTrace .55s ease-out forwards;
 }
 .payline-svg circle.node {
@@ -36,4 +41,12 @@
   background: radial-gradient(circle, rgba(240,212,138,.28), transparent 72%);
   box-shadow: inset 0 0 0 1px rgba(240,212,138,.45);
 }
+.reel.anticipate {
+  box-shadow: inset 0 0 28px rgba(201,164,74,.45), 0 0 22px rgba(201,164,74,.35);
+  animation: teasePulse .55s ease-in-out infinite;
+}
 @keyframes lineTrace { to { stroke-dashoffset: 0; } }
+@keyframes teasePulse {
+  0%,100% { box-shadow: inset 0 0 18px rgba(201,164,74,.28), 0 0 10px rgba(201,164,74,.2); }
+  50% { box-shadow: inset 0 0 36px rgba(240,212,138,.55), 0 0 26px rgba(240,212,138,.4); }
+}
